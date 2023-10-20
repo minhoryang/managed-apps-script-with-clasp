@@ -1,0 +1,33 @@
+{
+  "name": "managed-apps-script-with-clasp",
+  "version": "managed_via_clasp",
+  "description": "managed-apps-script-with-clasp (template)",
+  "scripts": {
+    "clasp": "clasp",
+    "pull": "npm run clasp pull",
+    "push": "npm run clasp push",
+    "versions": "npm run clasp versions",
+    "--": "// WEB URLS",
+    "code": "npm run clasp open",
+    "sheet": "open https://docs.google.com/spreadsheets/d/$SHEET_ID",
+    "versions:web": "open https://script.google.com/u/0/home/projects/$SCRIPT_ID/projecthistory",
+    "---": "// HOOKS",
+    "prepush": "repository-check-dirty",
+    "postcommit:version-tag-now": "npm run clasp version -- \"$(git describe --always --dirty --tags) '$(git show --no-patch --format=%B | head -n 1)'\""
+  },
+  "post-commit": [
+    "postcommit:version-tag-now"
+  ],
+  "author": "Minho Ryang (minhoryang@gmail.com)",
+  "repository": {"url": "https://github.com/minhoryang/managed-apps-script-with-clasp"},
+  "license": "MIT",
+  "devDependencies": {
+    "@google/clasp": "^2.4.2",
+    "post-commit": "^0.0.1",
+    "repository-check-dirty": "^6.1.1"
+  },
+  "engines": {
+    "node": ">=18.0.0 <19.0.0"
+  },
+  "engineStrict": true
+}
